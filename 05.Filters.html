@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body>
+    <h1>FILTERS</h1>
+    <div ng-app="App" ng-controller="personCtrl">
+      <h3>Lista de productos</h3>
+      <p><b>Filtro:</b> <input type="text" ng-model="test" /></p>
+      <ul>
+        <li ng-repeat="x in productos | filter:test">
+          {{ x.nombre | uppercase }} , {{ x.precio | currency }}
+          <span><button ng-click="agregarCarrito(x)">Agregar</button></span>
+        </li>
+      </ul>
+      <h3>Carrito de Compras</h3>
+      <table border="1" width="100%">
+        <tr>
+          <th ng-click="ordenarPor('nombre')">Producto</th>
+          <th ng-click="ordenarPor('precio')">Precio</th>
+        </tr>
+        <tr ng-repeat="x in carrito | orderBy:orden">
+          <td>{{x.nombre | uppercase}}</td>
+          <td>{{x.precio | currency}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      angular.module("App", []).controller("personCtrl", function ($scope) {
+        $scope.filtro = "";
+        $scope.carrito = [];
+        $scope.productos = [
+          { nombre: "polera", precio: 50 },
+          { nombre: "zapatillas", precio: 300 },
+          { nombre: "chamarra", precio: 150 },
+          { nombre: "pantalón", precio: 90 },
+          { nombre: "corbata", precio: 30 },
+          { nombre: "camisa", precio: 200 },
+          { nombre: "vestido", precio: 500 },
+        ];
+        $scope.agregarCarrito = function (producto) {
+          $scope.carrito.push(producto);
+        };
+        $scope.ordenarPor = function (x) {
+          $scope.orden = x;
+        };
+      });
+    </script>
+  </body>
+</html>

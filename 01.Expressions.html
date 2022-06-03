@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body>
+    <div
+      ng-app=""
+      ng-init="backColor='yellow';producto='uno'; precio=5;cantidad=10; persona={nombre:'Liz',apellido:'Mendoza',cargo:'Pasante'}; arreglo=[1,2,3,4,5,6]"
+    >
+      <h1>Ejercicios de Expresiones</h1>
+      <h3>1. Números</h3>
+      <p>Mi primera expresión (5+5+20): {{ 5 + 5 + 20}}</p>
+      <h3>2. Variables</h3>
+      <div>
+        <input style="background-color:{{backColor}}" ng-model="backColor" />
+      </div>
+      <h3>3. Strings y cálculos</h3>
+      <p>Producto: {{ producto }}</p>
+      <p>Cantidad: {{ cantidad }}</p>
+      <p>Precio: {{ precio }}</p>
+      <p>Total: {{ precio * cantidad }}</p>
+      <h3>4. Objetos</h3>
+      <p><b>Nombre:</b> <span ng-bind="persona.nombre + ' ' + persona.apellido"></span></p>
+      <p><b>Cargo:</b> <span ng-bind="persona.cargo"></span></p>
+      <h3>5. Arreglos</h3>
+      <p>El tercer elemento del arreglo es {{arreglo[2]}}</p>
+    </div>
+  </body>
+</html>

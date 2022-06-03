@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body>
+    <h1>Models, Bindings, Controllers</h1>
+    <h2>Juego de Piedra, Papel, Tijeras</h2>
+    <div ng-app="App" ng-controller="controlador">
+      <p><b>Ingrese su Nombre:</b> <input ng-model="jugador" /></p>
+      <h3>JUGADOR "{{ jugador }}" ELIJA UNA OPCION</h3>
+      <select ng-change="juegaMaquina()" ng-model="opcionElegida">
+        <option value="" selected disabled hidden>Elija de la lista</option>
+        <option ng-repeat="x in opciones">{{ x }}</option>
+      </select>
+      <h3>JUGADOR "<span ng-bind="jugador"></span>" ELIGIÓ {{ opcionElegida }}</h3>
+      <h3>MÁQUINA ELIGIÓ {{ opcionMaquina }}</h3>
+    </div>
+
+    <script>
+      var app = angular.module("App", []);
+
+      app.controller("controlador", function ($scope) {
+        $scope.opcionElegida = "";
+        $scope.opcionMaquina = "";
+        $scope.jugador = "";
+        $scope.opciones = ["piedra", "papel", "tijeras"];
+        $scope.juegaMaquina = function () {
+          if ($scope.opcionElegida) {
+            const opcion = obtenerRandom(0, 3);
+            $scope.opcionMaquina = $scope.opciones[opcion];
+            console.log($scope.opcionElegida, opcion);
+          }
+        };
+      });
+
+      function obtenerRandom(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
+    </script>
+  </body>
+</html>

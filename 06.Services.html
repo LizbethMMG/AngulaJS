@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <h1>SERVICES</h1>
+    <h5>Eejemplo usando http, interval, Bootstrap, JSON</h5>
+    <br />
+    
+    <div ng-app="App" ng-controller="controlador">
+      <div class="card mb-3" style="max-width: 540px">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="{{usuario.picture.large}}" class="img-fluid rounded-start" alt="..." />
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5
+                class="card-title"
+                ng-bind="usuario.name.title + ' ' + usuario.name.first + ' ' + usuario.name.last"
+              ></h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Email:</b> {{usuario.email}}</li>
+                <li class="list-group-item"><b>Teléfono:</b> {{usuario.phone}}</li>
+                <li class="list-group-item"><b>Celular:</b> {{usuario.cell}}</li>
+                <li class="list-group-item"><b>Nacionalidad:</b> {{usuario.nat}}</li>
+              </ul>
+              <p class="card-text"><small class="text-muted">Actualizado a las {{tiempo}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      var app = angular.module("App", []);
+      app.controller("controlador", function ($scope, $http, $interval) {
+        $http.get("https://randomuser.me/api/").then(function (response) {
+          $scope.usuario = response.data.results[0];
+          $scope.tiempo = new Date().toLocaleTimeString();
+        });
+
+        $interval(function () {
+          $http.get("https://randomuser.me/api/").then(function (response) {
+            $scope.usuario = response.data.results[0];
+            $scope.tiempo = new Date().toLocaleTimeString();
+          });
+        }, 20000);
+      });
+    </script>
+  </body>
+</html>

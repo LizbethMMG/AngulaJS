@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body>
+    <div
+      ng-app=""
+      ng-init="factura={nro:1234,fecha:'01-01-2022',nit:5556667,apellido:'Mendoza',detalle:[{producto:'leche',precio:6},{producto:'pan',precio:10}]}"
+    >
+      <h1>DIRECTIVES</h1>
+      <h3>Factura Nº {{ factura.nro }}</h3>
+      <p><b>Fecha: </b>{{ factura.fecha }}</p>
+      <p><b>Apellido: </b>{{ factura.apellido }}</p>
+      <h4>Detalle de la compra</h4>
+      <ul>
+          <li ng-repeat="x in factura.detalle">
+              <span ng-bind="x.producto + ': ' + x.precio + ' bs'"></span>
+          </li>
+      </ul>
+    </div>
+  </body>
+</html>
